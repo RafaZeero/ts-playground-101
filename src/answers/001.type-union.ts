@@ -1,3 +1,5 @@
+// https://www.typescriptlang.org/play?#code/MYewdgzgLgBAZgJwK4EsoRgXhgbwFAwwCGADiQDYCmAXDAOwA0BMARkWO0bQIwBMThEAnYBzGjACsA4kVk9eAZjwBfANx48UAJ4lKMAILlyAMWRoM2bbpBx4Z9Os069AZRRgRVU6ljZ8hAG0AaRh3GABrSi0bAyNvcwBdWn9CGGDeULAYIKSYMCQAWxZKBHVCNRUAyOjbQxN7CATHUEhYRB8AdTQACwAVZ1o3Dy97LFxmNg4OHmlSCnEFaSFRBdnZLkkVdSA
+
 const fruits = {
   apple: 7,
   banana: 12,
@@ -12,12 +14,6 @@ type SingleFruit = {
     [K2 in K]: number;
   };
 }[keyof AllFruits];
-
-type Apple = {
-  apple: {
-    apple: number;
-  };
-}['apple'];
 
 const fruitWithType: SingleFruit = {
   banana: 1,
