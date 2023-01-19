@@ -1,28 +1,39 @@
-type Merge<A, B> = any;
+type Merge<A, B> = {
+  [Key in keyof (A & B)]: Key extends keyof A ? A[Key] : Key extends keyof B ? B[Key] : never;
+};
 
-type UserWithoutId = {
+type BasicUser = {
   name: string;
   job: string;
+  skills: string[];
 };
 
-const userWithouId: UserWithoutId = {
+const userWithoutId = {
   name: 'Daniel',
-  job: 'toddler'
+  job: 'toddler',
+  skills: ['breastfeed']
 };
 
-type UserWithId = {
-  id: number;
-};
-
-const userWithId: UserWithId = {
+const userWithId = {
   id: 1
 };
 
-type User = Merge<UserWithId, UserWithoutId>;
-
-const userDaniel: User = {
-  name: 'Daniel',
-  job: 'toddler',
-  id: 1,
-  pleaseErrorOut: ''
+type ID = {
+  id: number;
 };
+
+type User<T = BasicUser> = Merge<T, ID>;
+//    ^?
+
+const userDaniel: User<{}> = {
+  //      ^?
+  ...userWithoutId,
+  //      ^?
+  ...userWithId
+  //      ^?
+} as const;
+
+console.log(userDaniel);
+
+type Testing = typeof userDaniel;
+//     ^?
