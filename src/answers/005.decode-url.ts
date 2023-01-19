@@ -21,7 +21,7 @@ const splittedNaruto: Naruto = 'Naruto';
 const testSplit = 'aa0bb0cc0dd0ee';
 //     ^?
 
-type TestSplit = Split<typeof testSplit, '0'>;
+type TestSplit = Split<'', '0'>;
 //      ^?
 
 type Split2<S extends string, D extends string> = string extends S
@@ -29,6 +29,11 @@ type Split2<S extends string, D extends string> = string extends S
   : S extends `${infer T}${D}${infer K}`
   ? [T, ...Split2<K, D>]
   : [S];
+
+type GetValueFromIndex<A extends any[], N extends number> = A[N];
+
+const testSplit2: Split2<`${78977881243757}`, '1'>[0] = '7897788';
+//        ^?
 
 /**
  * FIRST CALL: ["aa", "bb0cc0dd0ee"],
