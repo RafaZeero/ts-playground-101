@@ -1,12 +1,15 @@
-// https://www.typescriptlang.org/play?#code/MYewdgzgLgBAZgJwK4EsoRgXhgbwFAwwCGADiQDYCmAXDAOwA0BMARkWO0bQIwBMThEAnYBzGjACseAL548UAJ4lKMAILlyAMWRoM2RcpBx4O9HIMqAyijAiq21LGw5Z8pSoDyYSg7RZczKQU4viEhEFUtGBIALYslAjMstIA2gDkEZRpALpyoJCwlAAeRDHBtF4+pv6hxGSRMHwAzDJ54NAwEDZ2VY4wtNa29tXOzGwcHDyteEA
+// https://www.typescriptlang.org/play?#code/MYewdgzgLgBAZgJwK4EsoRgXhgbwFAwwCGADiQDYCmAXDAOwA0BMARkWO0bQIwBMThEAnYBzGjACseAL548UAJ4lKMAILlyAMWRoM2RcpBx4O9HIMqA8mErbUsbPkKkK4p4RgpIKACaVVZFSWLABWtGBIALYslAjMstIA2gDkLlTJALpyoJCwlAAeRJGutNa2pli4zF4Qvv6BlMFhMLwAzHwy2eDQMKAg5E2VOLJ4cEIwABQ5PYj2nmAm9hAAlFWE0-2UAHTkICITs2jLMkA
 
 const fruits = {
   apple: 7,
   banana: 12,
-  orange: 5
+  orange: 5,
 };
 
+type GoalType = { apple: number } | { banana: number } | { orange: number };
+
 type AllFruits = typeof fruits;
+//     ^?
 
 type Apple = {
   apple: {
@@ -14,10 +17,13 @@ type Apple = {
   };
 }['apple'];
 
-const fruitWithType: SingleFruit = {
+const fruitWithType: OneOrManyFruits = {
   banana: 1,
   apple: 3,
-  orange: 3
+  orange: 3,
 };
+
+for (let fruit in fruits) {
+}
 
 export {};
