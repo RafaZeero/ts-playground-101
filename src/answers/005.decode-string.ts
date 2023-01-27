@@ -77,5 +77,5 @@ type QueryParams = {
 
 const obj: Union.Merge<QueryParams> = {
   a: 'foo',
-  b: 'wow'
+  b: 'wow',
 };
