@@ -27,8 +27,8 @@ type EntityWithId =
     };
 
 const result: EntityWithId = {
-  type: 'comment',
-  commentId: '123'
+  type: 'post',
+  postId: 'd1as62dsa1',
 };
 
 export {};

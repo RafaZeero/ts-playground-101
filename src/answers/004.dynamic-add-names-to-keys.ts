@@ -33,7 +33,27 @@ type EntityWithId = {
 
 const result: EntityWithId = {
   type: 'comment',
-  commentId: '123'
+  commentId: '123',
+};
+
+const basket = {
+  market: 'fruits',
+  library: 'books',
+};
+
+type AddPriceAndID = {
+  [Key in keyof typeof basket]: {
+    [P in Key]: {
+      aaaa: typeof basket[Key];
+    };
+  } & Record<`${typeof basket[Key]}Price`, number> &
+    Record<`${typeof basket[Key]}ID`, string>;
+}[keyof typeof basket];
+
+const example: AddPriceAndID = {
+  market: {
+    aaaa: '',
+  },
 };
 
 export {};
