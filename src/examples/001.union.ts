@@ -1,11 +1,23 @@
 type UnionPets = Dog | Cat
 type IntersecPets = Dog & Cat
 
-type Dog = { size: number; breed: string; trained: boolean }
-type Cat = { size: number; color: string }
+type Dog = { animal: 'dog'; size: number; breed: string; trained: boolean }
+type Cat = { animal: 'cat'; quantity: number; color: string }
 
-//@ts-ignore
-const unionPets: UnionPets = {}
+const unionPets: UnionPets = {
+  animal: 'dog',
+  size: 3,
+  breed: 'mutt',
+  trained: true,
+  quantity: 3,
+  color: 'caramel',
+}
 
-//@ts-ignore
-const intersecPets: IntersecPets = {}
+const intersecPets: IntersecPets = {
+  animal: 'dog',
+  size: 3,
+  breed: 'mutt',
+  trained: true,
+  quantity: 3,
+  color: 'caramel',
+}
