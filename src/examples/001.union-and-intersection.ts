@@ -1,23 +1,36 @@
-type UnionPets = Dog | Cat
-type IntersecPets = Dog & Cat
+// @ts-nocheck
+type UnionPets = 
+| Dog 
+| Cat 
+| (Dog & Cat)
 
-type Dog = { animal: 'dog'; size: number; breed: string; trained: boolean }
-type Cat = { animal: 'cat'; quantity: number; color: string }
+type IntersecPets = 
+& Dog 
+& Cat
+
+type Dog = { breed: string; trained: boolean }
+type Cat = { color: string; scratches: number }
 
 const unionPets: UnionPets = {
-  animal: 'dog',
-  size: 3,
   breed: 'mutt',
   trained: true,
-  quantity: 3,
   color: 'caramel',
 }
 
 const intersecPets: IntersecPets = {
-  animal: 'dog',
-  size: 3,
   breed: 'mutt',
   trained: true,
-  quantity: 3,
   color: 'caramel',
+}
+
+function filter(pet: UnionPets){
+  if('breed' in pet){ // Type Dog
+    pet.breed
+  }
+  if('color' in pet){ // Type Cat
+    pet.color
+  }
+  if('breed' in pet && 'color' in pet){ // Type Dog & Cat
+    pet
+  }
 }
