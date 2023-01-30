@@ -1,78 +1,23 @@
-import { String, Union } from 'ts-toolbelt'
-
 const query = `/home?a=foo&b=wow`
+
+const concat = 'aaa' + 'bbb'
 
 const naruto = 'Naruto Uzumaki'
 
-type Split<FullString extends string, Deliminator extends string> = string extends FullString
-  ? string[]
-  : FullString extends ''
-  ? []
-  : FullString extends `${infer FirstHalf}${Deliminator}${infer SecondHalf}`
-  ? [FirstHalf, ...Split<SecondHalf, Deliminator>]
-  : [FullString]
+query.split('?') // ['/home', 'a=foo&b=wow']
 
-type Naruto = Split<typeof naruto, ' '>[0]
-type Uzumaki = Split<typeof naruto, ' '>[1]
-
-const splittedNaruto: Naruto = 'Naruto'
-//      ^?
-
-const testSplit = 'aa0bb0cc0dd0ee'
-//     ^?
-
-type TestSplit = Split<'', '0'>
-//      ^?
-
-type Split2<S extends string, D extends string> = string extends S
+type Split<StringValue extends string, Separator extends string> = string extends StringValue
   ? never
-  : S extends `${infer T}${D}${infer K}`
-  ? [T, ...Split2<K, D>]
-  : [S]
+  : StringValue extends `${infer FirstPart}${Separator}${infer LastPart}`
+  ? [FirstPart, ...Split<LastPart, Separator>]
+  : [StringValue]
 
-type GetValueFromIndex<A extends any[], N extends number> = A[N]
-
-const testSplit2: Split2<`${78977881243757}`, '1'>[0] = '7897788'
-//        ^?
-
-/**
- * FIRST CALL: ["aa", "bb0cc0dd0ee"],
- *
- * SECOND CALL: ["aa", "bb", "cc0dd0ee"]
- *
- * ...
- *
- * LAST CALL: ["aa","bb","cc","dd","ee"]
- *
- */
-
-type MyQuerySplitted = Split<typeof query, '?'>[1]
-//    ^?
-
-type Query = typeof query
-//   ^?
-
-type SecondQueryPart = String.Split<Query, '?'>[1]
+type Query = Uppercase<Split<typeof naruto, ' '>[0]>
 //     ^?
 
-type QueryElements = String.Split<SecondQueryPart, '&'>
+const pattern = 'aa0bb0cc0dd'
+
+const result = pattern.split('0')
+
+type SplitPattern = Split<typeof pattern, '0'>[1]
 //     ^?
-
-type QueryParams = {
-  //     ^?
-
-  [QueryElement in QueryElements[number]]: {}
-}
-
-/**
- * type QueryParams = {
-  [QueryElement in QueryElements[number]]: {
-    [Key in String.Split<QueryElement, "=">[0]]: String.Split<
-      QueryElement,
-      "="
-    >[1]
-  }
-}[QueryElements[number]]
- */
-
-export {}

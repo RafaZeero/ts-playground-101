@@ -1,29 +1,16 @@
 type NestedObjectType = {
   prop1: {
-    prop2: string;
-    prop3: string;
-  };
+    prop2: number
+    prop3: number
+  }
   prop4: {
     prop5: {
-      prop6: string;
-    };
-  };
-};
+      prop6: number
+    }
+  }
+}
 
-type NumberNestedObject<T> = T extends string
-  ? number
-  : {
-      [Property in keyof T]: {
-        [Property2 in keyof T[Property]]: {
-          [Property3 in keyof T[Property][Property2]]: number;
-        };
-      };
-    };
-
-type ConvertedNumberNestedObjectType = NumberNestedObject<NestedObjectType>;
-//     ^?
-
-const nested: ConvertedNumberNestedObjectType = {
+const nested: NestedObjectType = {
   prop1: {
     prop2: 3,
     prop3: 1,
@@ -33,9 +20,9 @@ const nested: ConvertedNumberNestedObjectType = {
       prop6: 1,
     },
   },
-};
+}
 
-const nested2: ConvertedNumberNestedObjectType = {
+const nested2: NestedObjectType = {
   prop1: {
     prop2: 1,
     prop3: 4,
@@ -45,6 +32,6 @@ const nested2: ConvertedNumberNestedObjectType = {
       prop6: 3,
     },
   },
-};
+}
 
-export {};
+export {}
